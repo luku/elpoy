@@ -7,10 +7,11 @@
 # by default run install
 DEPLOY_ACTION=${1:-install}
 
+DIR=$( cd "$( dirname "$0" )" && pwd )
 echo "deploy action = $DEPLOY_ACTION and DEV_MODE = $DEV_MODE"
-echo "pwd = $( pwd )"
+echo "pwd = $( pwd ) dir = $DIR"
 
-cd $( pwd )
+#cd "$DIR"
 
 # current remote name
 remote_name=$(git remote show);
