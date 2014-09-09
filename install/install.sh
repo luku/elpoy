@@ -7,6 +7,14 @@
 # by default run install
 DEPLOY_ACTION=${1:-install}
 
+# collect env variables
+# dev mode to apply
+DEV_MODE="$DEV_MODE"
+# branch name to update
+BRANCH_NAME="$BRANCH_NAME"
+# target dir for git repo
+TARGET_DIR="$TARGET_DIR"
+
 #DIR=$( cd "$( dirname "$0" )" && pwd )
 echo "deploy action = $DEPLOY_ACTION and DEV_MODE = $DEV_MODE and TARGET_DIR = $TARGET_DIR"
 echo "pwd = $( pwd ) "
@@ -16,13 +24,13 @@ cd "$TARGET_DIR"
 
 # current remote name
 remote_name=$(git remote show);
-# current branch name
-#branch_name=$(git rev-parse --abbrev-ref HEAD);
-#current repo URL
-repo_url=$(git ls-remote --get-url $remote_name);
+#current repo URL - doesn't work on 1.7.1
+#repo_url=$(git ls-remote --get-url "$remote_name");
 
 echo "pwd = $( pwd ) remote_name = $remote_name and repo_url = $repo_url"
 echo $(pidof -x monitor_dropbox.sh);
+
+php install/install.php
 exit;
 
 if [ "$DEPLOY_ACTION" = "install" ] 
