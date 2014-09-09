@@ -7,6 +7,10 @@
 # by default run install
 DEPLOY_ACTION=${1:-install}
 
+echo "deploy action = $DEPLOY_ACTION and DEV_MODE = $DEV_MODE"
+echo "pwd = $( pwd )"
+
+cd $( pwd )
 
 # current remote name
 remote_name=$(git remote show);
@@ -15,8 +19,7 @@ remote_name=$(git remote show);
 #current repo URL
 repo_url=$(git ls-remote --get-url $remote_name);
 
-echo "deploy action = $DEPLOY_ACTION and DEV_MODE = $DEV_MODE"
-echo "remote_name = $remote_name and repo_url = $repo_url"
+echo "pwd = $( pwd ) remote_name = $remote_name and repo_url = $repo_url"
 echo $(pidof -x monitor_dropbox.sh);
 exit;
 
