@@ -38,11 +38,11 @@ if [ "$DEPLOY_ACTION" = "install" ]; then
 	php "$INSTALL_DIR"/install.php "$DEPLOY_ACTION" "$DEV_MODE" 
 	echo 'Starting monitoring scripts'
 	# this will start the monitoring scripts, but admin still needs to update crontab!!
-	sh cron1.sh > /dev/null 2>&1
+	# sh cron1.sh > /dev/null 2>&1
 else 
 	echo "Pulling from $remote_name/$BRANCH_NAME"
 	# should I use origin or $remote_name here??? git pull -s recursive -X theirs "$remote_name"/"$branch_name"
-	git pull -s recursive -X theirs "$remote_name"/"$BRANCH_NAME"
+	git pull -s recursive -X theirs "$remote_name" "$BRANCH_NAME"
 	# if config or monitoring scripts/templates were changed run installation update 
 	changed_files="$(git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD)"
 	echo "$changed_files" | grep 'config\.php\|\.sh' && { 
